@@ -1,0 +1,18 @@
+{
+  "name": "@considonet/g-windowresizer",
+  "version": "1.4.1",
+  "description": "Helper for handling window onResize and onOrientationChange events",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gstrap"
+  ],
+  "author": "ConsidoNet Solutions Paweł Gabryelewicz",
+  "license": "MIT",
+  "dependencies": {
+      "jquery": "^3.2.1",
+	  "@considonet/g-sel": "^2.0.0"
+  }
+}
