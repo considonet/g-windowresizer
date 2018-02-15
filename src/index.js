@@ -1,9 +1,12 @@
-// WindowResizer 1.4.1.20171106
-// Copyright (C) 2013-2017 ConsidoNet Solutions / www.considonet.com
+// WindowResizer 1.4.2.20180215
+// Copyright (C) 2013-2018 ConsidoNet Solutions / www.considonet.com
 // Released under MIT Licence
 
 /*
 VERSION HISTORY
+1.4.2.20180215 @pg
++ TypeScript declarations
+
 1.4.1.20171106 @pg
 * Now acting as a separate npm module
 

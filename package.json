@@ -1,8 +1,9 @@
 {
   "name": "@considonet/g-windowresizer",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Helper for handling window onResize and onOrientationChange events",
   "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
