@@ -1,9 +1,12 @@
-// WindowResizer 1.4.2.20180215
+// WindowResizer 1.4.3.20180312
 // Copyright (C) 2013-2018 ConsidoNet Solutions / www.considonet.com
 // Released under MIT Licence
 
 /*
 VERSION HISTORY
+1.4.3.20180312 @pg
++ jQuery/g-sel dependency dropped
+
 1.4.2.20180215 @pg
 + TypeScript declarations
 
@@ -14,8 +17,6 @@ VERSION HISTORY
 + ES6
 
 */
-
-import { $window } from "@considonet/g-sel";
 
 export default (() => {
 
@@ -32,17 +33,23 @@ export default (() => {
   };
 
   // Private methods
+  const getScreenDimensions = () => {
+    return {
+      w: window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth,
+      h: window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight
+    };
+  };
+
   const onResize = () => {
 
-    const w = $window.width();
-    const h = $window.height();
+    const dims = getScreenDimensions();
 
     if(breakpointResizers.length>0) {
 
       let breakpoint = '';
 
       Object.keys(breakpoints).forEach(width => {
-        breakpoint = w>=width ? breakpoints[width] : breakpoint;
+        breakpoint = dims.w>=width ? breakpoints[width] : breakpoint;
       });
 
       if(lastBreakpoint!==breakpoint) {
@@ -50,7 +57,7 @@ export default (() => {
         lastBreakpoint = breakpoint;
 
         breakpointResizers.forEach(resizer => {
-          resizer(w, h, breakpoint);
+          resizer(dims.w, dims.h, breakpoint);
         });
 
       }
@@ -58,7 +65,7 @@ export default (() => {
     }
 
     resizers.forEach(resizer => {
-      resizer(w, h);
+      resizer(dims.w, dims.h);
     });
 
   };
@@ -67,30 +74,47 @@ export default (() => {
 
     if(orientationResizers.length>0) {
 
-      const w = $window.width();
-      const h = $window.height();
+      const dims = getScreenDimensions();
       let orientation;
 
-      if(w>=h) {
+      if(dims.w>=dims.h) {
         orientation = 'h';
       } else {
         orientation = 'v';
       }
 
       orientationResizers.forEach(resizer => {
-        resizer(w, h, orientation);
+        resizer(dims.w, dims.h, orientation);
       });
 
     }
 
   };
 
-  // Initialization
-  $window.on("resize", onResize);
-  $window.on('orientationchange', onOrientationChange);
+  const assignEvent = function (el, eventName, handler) {
 
-  $window.on("load", () => {
-    $window.trigger("resize");
+    if(typeof el.addEventListener !== "undefined") {
+      el.addEventListener(eventName, handler, false);
+    } else if(typeof el.attachEvent !== "undefined") {
+      el.attachEvent(`on${eventName}`, handler);
+    }
+
+  };
+
+  const triggerEvent = function (el, eventName) {
+
+    const ev = window.document.createEvent("UIEvents");
+    ev.initUIEvent(eventName, true, false, el, 0);
+    el.dispatchEvent(ev);
+
+  };
+
+  // Initialization
+  assignEvent(window, "resize", onResize);
+  assignEvent(window, "orientationchange", onOrientationChange);
+
+  assignEvent(window, "load", () => {
+    triggerEvent(window, "resize");
   });
 
   return {
