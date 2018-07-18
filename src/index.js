@@ -1,9 +1,15 @@
-// WindowResizer 1.4.3.20180312
+// WindowResizer 2.0.0
 // Copyright (C) 2013-2018 ConsidoNet Solutions / www.considonet.com
 // Released under MIT Licence
 
 /*
 VERSION HISTORY
+2.0.0 (20180717) @pg
++ Switched to semver
+- Dropped support for deprecated .add method
+* Dist package now transpiled from ES6 (compatibility with building environments not transpiling node_modules)
++ Source linted with tslint
+
 1.4.3.20180312 @pg
 + jQuery/g-sel dependency dropped
 
@@ -23,20 +29,20 @@ export default (() => {
   const resizers = [];
   const breakpointResizers = [];
   const orientationResizers = [];
-  let lastBreakpoint = '';
+  let lastBreakpoint = "";
 
   let breakpoints = { // Twitter Bootstrap 3.0 defaults, min-width => breakpoint name
-    '0': 'xs',
-    '768': 'sm',
-    '992': 'md',
-    '1200': 'lg'
+    "0": "xs",
+    "768": "sm",
+    "992": "md",
+    "1200": "lg"
   };
 
   // Private methods
   const getScreenDimensions = () => {
     return {
-      w: window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth,
-      h: window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight
+      w: window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName("body")[0].clientWidth,
+      h: window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName("body")[0].clientHeight
     };
   };
 
@@ -46,7 +52,7 @@ export default (() => {
 
     if(breakpointResizers.length>0) {
 
-      let breakpoint = '';
+      let breakpoint = "";
 
       Object.keys(breakpoints).forEach(width => {
         breakpoint = dims.w>=width ? breakpoints[width] : breakpoint;
@@ -70,7 +76,7 @@ export default (() => {
 
   };
 
-  const onOrientationChange = function () {
+  const onOrientationChange = function() {
 
     if(orientationResizers.length>0) {
 
@@ -78,9 +84,9 @@ export default (() => {
       let orientation;
 
       if(dims.w>=dims.h) {
-        orientation = 'h';
+        orientation = "h";
       } else {
-        orientation = 'v';
+        orientation = "v";
       }
 
       orientationResizers.forEach(resizer => {
@@ -91,7 +97,7 @@ export default (() => {
 
   };
 
-  const assignEvent = function (el, eventName, handler) {
+  const assignEvent = function(el, eventName, handler) {
 
     if(typeof el.addEventListener !== "undefined") {
       el.addEventListener(eventName, handler, false);
@@ -101,7 +107,7 @@ export default (() => {
 
   };
 
-  const triggerEvent = function (el, eventName) {
+  const triggerEvent = function(el, eventName) {
 
     const ev = window.document.createEvent("UIEvents");
     ev.initUIEvent(eventName, true, false, el, 0);
@@ -120,13 +126,6 @@ export default (() => {
   return {
 
     // Public methods
-    add(fn) { // deprecated
-
-      console.log('Usage of WindowResizer.add() is deprecated, please use onResize instead');
-      resizers.push(fn);
-
-    },
-
     onResize(fn) {
 
       resizers.push(fn);
