@@ -1,6 +1,6 @@
 {
   "name": "@considonet/g-windowresizer",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Helper for handling window onResize and onOrientationChange events",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",

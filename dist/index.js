@@ -4,12 +4,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-// WindowResizer 2.0.0
+// WindowResizer 2.0.1
 // Copyright (C) 2013-2018 ConsidoNet Solutions / www.considonet.com
 // Released under MIT Licence
 
 /*
 VERSION HISTORY
+2.0.1 (20180718) @pg
++ .npmignore file, removed source and .idea stuff from the actual package
+
 2.0.0 (20180717) @pg
 + Switched to semver
 - Dropped support for deprecated .add method
