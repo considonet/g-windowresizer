@@ -1,15 +1,14 @@
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-// WindowResizer 2.0.1
+// WindowResizer 2.1.0
 // Copyright (C) 2013-2018 ConsidoNet Solutions / www.considonet.com
 // Released under MIT Licence
 
 /*
 VERSION HISTORY
+2.1.0 (20181125) @pg
++ switch to GitHub, file cleanup
+
 2.0.1 (20180718) @pg
 + .npmignore file, removed source and .idea stuff from the actual package
 
@@ -33,7 +32,7 @@ VERSION HISTORY
 
 */
 
-exports.default = function () {
+var index = (function () {
 
   var resizers = [];
   var breakpointResizers = [];
@@ -145,4 +144,6 @@ exports.default = function () {
       breakpoints = bp;
     }
   };
-}();
+})();
+
+module.exports = index;
