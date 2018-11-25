@@ -13,7 +13,7 @@
   ],
   "author": "ConsidoNet Solutions Paweł Gabryelewicz",
   "license": "MIT",
-  "repository": "github:considonet/g-fontasticbundler",
+  "repository": "github:considonet/g-windowresizer",
   "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.26.0",
