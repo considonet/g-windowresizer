@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", {
 /*
 VERSION HISTORY
 2.0.1 (20180718) @pg
-+ .npmignore file, removed source and .idea stuff from the actual package
++ .gitignore file, removed source and .idea stuff from the actual package
 
 2.0.0 (20180717) @pg
 + Switched to semver
