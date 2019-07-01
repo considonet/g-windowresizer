@@ -35,22 +35,19 @@ VERSION HISTORY
 + ES6
 
 */
-
 var index = (function () {
-
   var resizers = [];
   var breakpointResizers = [];
   var orientationResizers = [];
   var lastBreakpoint = "";
-
-  var breakpoints = { // Twitter Bootstrap 3.0 defaults, min-width => breakpoint name
+  var breakpoints = {
+    // Twitter Bootstrap 3.0 defaults, min-width => breakpoint name
     "0": "xs",
     "768": "sm",
     "992": "md",
     "1200": "lg"
-  };
+  }; // Private methods
 
-  // Private methods
   var getScreenDimensions = function getScreenDimensions() {
     return {
       w: window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName("body")[0].clientWidth,
@@ -59,21 +56,16 @@ var index = (function () {
   };
 
   var onResize = function onResize() {
-
     var dims = getScreenDimensions();
 
     if (breakpointResizers.length > 0) {
-
       var breakpoint = "";
-
       Object.keys(breakpoints).forEach(function (width) {
         breakpoint = dims.w >= width ? breakpoints[width] : breakpoint;
       });
 
       if (lastBreakpoint !== breakpoint) {
-
         lastBreakpoint = breakpoint;
-
         breakpointResizers.forEach(function (resizer) {
           resizer(dims.w, dims.h, breakpoint);
         });
@@ -86,11 +78,9 @@ var index = (function () {
   };
 
   var onOrientationChange = function onOrientationChange() {
-
     if (orientationResizers.length > 0) {
-
       var dims = getScreenDimensions();
-      var orientation = void 0;
+      var orientation;
 
       if (dims.w >= dims.h) {
         orientation = "h";
@@ -105,46 +95,37 @@ var index = (function () {
   };
 
   var assignEvent = function assignEvent(el, eventName, handler) {
-
     if (typeof el.addEventListener !== "undefined") {
       el.addEventListener(eventName, handler, false);
     } else if (typeof el.attachEvent !== "undefined") {
-      el.attachEvent("on" + eventName, handler);
+      el.attachEvent("on".concat(eventName), handler);
     }
   };
 
   var triggerEvent = function triggerEvent(el, eventName) {
-
     var ev = window.document.createEvent("UIEvents");
     ev.initUIEvent(eventName, true, false, el, 0);
     el.dispatchEvent(ev);
-  };
+  }; // Initialization
 
-  // Initialization
+
   assignEvent(window, "resize", onResize);
   assignEvent(window, "orientationchange", onOrientationChange);
-
   assignEvent(window, "load", function () {
     triggerEvent(window, "resize");
   });
-
   return {
-
     // Public methods
     onResize: function onResize(fn) {
-
       resizers.push(fn);
     },
     onBreakpointChange: function onBreakpointChange(fn) {
-
       breakpointResizers.push(fn);
     },
     onOrientationChange: function onOrientationChange(fn) {
-
       orientationResizers.push(fn);
     },
     overrideBreakpoints: function overrideBreakpoints(bp) {
-
       breakpoints = bp;
     }
   };
