@@ -1,9 +1,14 @@
-// WindowResizer 2.1.1
-// Copyright (C) 2013-2018 ConsidoNet Solutions / www.considonet.com
+// WindowResizer 2.1.2
+// Copyright (C) 2013-2019 ConsidoNet Solutions / www.considonet.com
 // Released under MIT Licence
 
 /*
 VERSION HISTORY
+2.1.2 (20190701) @pg
+* Dependencies update
+* Switch to yarn
+* ES and UMD module compilation
+
 2.1.1 (20181125) @pg
 * ignore files fixes
 * cleanup
